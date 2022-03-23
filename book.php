@@ -19,6 +19,13 @@ if (isset($_SESSION["adm"])) {
 }
 
 
+$sql = "INSERT INTO booking (fk_userid,	hotel_id) VALUES ({$_SESSION["user"]}, {$_GET["id"]})";
+$res = mysqli_query($connect, $sql);
+if($res){
+    echo "Success";
 
+}else {
+    echo "Error";
+}
 
 ?>
