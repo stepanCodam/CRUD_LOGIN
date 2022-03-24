@@ -24,10 +24,10 @@ if ($_POST) {
     //variable for upload pictures errors is initialised
     $uploadError = '';
 
-    $picture = file_upload($_FILES['picture'], 'product'); //file_upload() called  
+    $picture = file_upload($_FILES['picture'], 'hotels'); //file_upload() called  
     if ($picture->error === 0) {
-        ($_POST["picture"] == "product.png") ?: unlink("../pictures/$_POST[picture]");
-        $sql = "UPDATE hotels SET name = '$name', price = $price, picture = '$picture->fileName', fk_bookingid = $booking WHERE id = {$id}";
+        ($_POST["picture"] == "hotel.png") ?: unlink("../../pictures/$_POST[picture]");
+        $sql = "UPDATE hotels SET name = '$name', price = $price, picture = '$picture->fileName' WHERE id = {$id}";
     } else {
         $sql = "UPDATE hotels SET name = '$name', price = $price  WHERE id = {$id}";
     }
