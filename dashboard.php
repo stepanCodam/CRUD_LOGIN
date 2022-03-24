@@ -15,7 +15,13 @@ if (isset($_SESSION["user"])) {
 
 $id = $_SESSION ['adm'];
 $status = 'adm';
-$sql = "SELECT * FROM users WHERE status != '$status'";
+
+
+$sql = "SELECT hotels.*, users.* FROM users
+left JOIN booking ON booking.fk_userid = users.id
+left JOIN hotels ON hotels.id = booking.hotel_id
+WHERE `status` != 'adm'";
+
 $result = mysqli_query($connect, $sql);
 
 $tbody = '';
@@ -26,7 +32,9 @@ if ($result->num_rows > 0) {
             <td>" . $row['first_name'] . " " . $row['last_name'] . "</td>
             <td>" . $row['date_of_birth'] . "</td>
             <td>" . $row['email'] . "</td>
-            <td><a href='update.php?id=" . $row['id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
+            <td>" . $row['email'] . "</td>
+            <td>" . $row['name'] . "</td>
+            <td><a href='updateadm.php?id=" . $row['id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
             <a href='delete.php?id=" . $row['id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
          </tr>";
     }
@@ -88,6 +96,7 @@ mysqli_close($connect);
                             <th>Date of birth</th>
                             <th>Email</th>
                             <th>Action</th>
+                            <th>Hotel</th>
                         </tr>
                     </thead>
                     <tbody>

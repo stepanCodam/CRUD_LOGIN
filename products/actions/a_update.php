@@ -19,7 +19,7 @@ require_once '../../components/file_upload.php';
 if ($_POST) {
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $booking = $_POST['booking'];
+   
     $id = $_POST['id'];
     //variable for upload pictures errors is initialised
     $uploadError = '';
@@ -27,9 +27,9 @@ if ($_POST) {
     $picture = file_upload($_FILES['picture'], 'product'); //file_upload() called  
     if ($picture->error === 0) {
         ($_POST["picture"] == "product.png") ?: unlink("../pictures/$_POST[picture]");
-        $sql = "UPDATE products SET name = '$name', price = $price, picture = '$picture->fileName', fk_bookingid = $booking WHERE id = {$id}";
+        $sql = "UPDATE hotels SET name = '$name', price = $price, picture = '$picture->fileName', fk_bookingid = $booking WHERE id = {$id}";
     } else {
-        $sql = "UPDATE products SET name = '$name', price = $price, fk_bookingid = $booking WHERE id = {$id}";
+        $sql = "UPDATE hotels SET name = '$name', price = $price  WHERE id = {$id}";
     }
     if (mysqli_query($connect, $sql) === TRUE) {
         $class = "success";

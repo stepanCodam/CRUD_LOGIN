@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (isset($_SESSION['adm']) != "") {
-    header("Location: ../../dashboard.php");
+if (isset($_SESSION['user']) != "") {
+    header("Location: ../../home.php");
     exit;
 }
 
@@ -15,19 +15,17 @@ require_once '../../components/db_connect.php';
 require_once '../../components/file_upload.php';
 
 if ($_POST) {
+
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $booking = $_POST['booking'];
+   
     $uploadError = '';
     //this function exists in the service file upload.
-    $picture = file_upload($_FILES['picture'], 'product');
+    $picture = file_upload($_FILES['picture'], 'hotels');
 
-    if ($booking == 'none') {
         //checks if the booking is undefined and insert null in the DB
-        $sql = "INSERT INTO hotels (name, price, picture, fk_bookingid) VALUES ('$name', $price, '$picture->fileName', null)";
-    } else {
-        $sql = "INSERT INTO hotels (name, price, picture, fk_bookingid) VALUES ('$name', $price, '$picture->fileName', $booking)";
-    }
+        $sql = "INSERT INTO hotels (name, price, picture) VALUES ('$name', $price, '$picture->fileName')";
+
 
     if (mysqli_query($connect, $sql) === true) {
         $class = "success";

@@ -13,11 +13,11 @@ if (!isset ($_SESSION['adm']) && !isset($_SESSION['user'])) {
 }
 
 $booking = "";
-$result = mysqli_query($connect, "SELECT * FROM booking");
+$result = mysqli_query($connect, "SELECT * FROM hotels");
 
 while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
   $booking .=
-      "<option value='{$row['bookingId']}'>{$row['bookingname']}</option>";
+      "<option value='{$row['name']}'>{$row['picture']}</option>";
 }
 ?>
 
@@ -56,15 +56,7 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                     <th>Picture</th>
                     <td><input class='form-control' type="file" name="picture" /></td>
                 </tr>
-                <tr>
-                    <th>Supplier</th>
-                    <td>
-                        <select class="form-select" name="supplier" aria-label="Default select example">
-                            <?php echo $booking; ?>
-                            <option selected value='none'>Undefined</option>
-                        </select>
-                    </td>
-                </tr>
+           
                 <tr>
                     <td><button class='btn btn-success' type="submit">Insert Product</button></td>
                     <td><a href="index.php"><button class='btn btn-warning' type="button">Home</button></a></td>

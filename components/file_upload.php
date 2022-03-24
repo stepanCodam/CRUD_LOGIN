@@ -4,7 +4,7 @@ function file_upload($picture, $source = 'user')
     $result = new stdClass(); //this object will carry status from file upload
     $result->fileName = 'avatar.png';
     if (isset($_SESSION['adm'])) {
-        $result->fileName = 'hotel.png';
+        $result->fileName = 'hotel.jpg';
     }
     $result->error = 1; //it could also be a boolean true/false
     //collect data from object $picture

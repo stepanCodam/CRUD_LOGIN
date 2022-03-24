@@ -22,20 +22,8 @@ if ($_GET['id']) {
         $name = $data['name'];
         $price = $data['price'];
         $picture = $data['picture'];
-        $booking = $data['fk_bookingid'];
-        $resultbooking = mysqli_query($connect, "SELECT * FROM booking");
-        $bookingList = "";
-        if (mysqli_num_rows($resultbooking) > 0) {
-            while ($row = $resultbooking->fetch_array(MYSQLI_ASSOC)) {
-                if ($row['bookingId'] == $booking) {
-                    $bookingList .= "<option selected value='{$row['bookingId']}'>{$row['booking_name']}</option>";
-                } else {
-                    $bookingList .= "<option value='{$row['bookingId']}'>{$row['booking_name']}</option>";
-                }
-            }
-        } else {
-            $bookingList = "<li>There are no bookings registered</li>";
-        }
+      
+        
     } else {
         header("location: error.php");
     }
@@ -82,14 +70,7 @@ if ($_GET['id']) {
                     <th>Picture</th>
                     <td><input class="form-control" type="file" name="picture" /></td>
                 </tr>
-                <tr>
-                    <th>booking</th>
-                    <td>
-                        <select class="form-select" name="booking" aria-label="Default select example">
-                            <?php echo $bookingList; ?>
-                        </select>
-                    </td>
-                </tr>
+              
                 <tr>
                     <input type="hidden" name="id" value="<?php echo $data['id'] ?>" />
                     <input type="hidden" name="picture" value="<?php echo $data['picture'] ?>" />
