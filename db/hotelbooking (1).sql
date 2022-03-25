@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 08:02 AM
+-- Generation Time: Mar 25, 2022 at 09:49 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -45,8 +45,7 @@ CREATE TABLE `hotels` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` decimal(13,2) NOT NULL,
-  `picture` varchar(255) DEFAULT NULL,
-  `fk_supplierId` int(11) DEFAULT NULL
+  `picture` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -71,10 +70,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `date_of_birth`, `email`, `picture`, `status`) VALUES
-(1, 'BOB', 'Tshigerillo', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '1996-06-06', 'bober@gmail.com', '6239b82334a91.jpg', 'adm'),
-(2, 'customeruno', 'customertestuno', 'bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a', '2000-01-01', 'uno@mail.com', '6239b8e7656dc.png', 'user'),
-(3, 'customerduos', 'duoscustomero', '4cc8f4d609b717356701c57a03e737e5ac8fe885da8c7163d3de47e01849c635', '2000-02-02', 'duos@mail.com', '6239b928c433c.png', 'user'),
-(4, 'userthree', 'treo', '68487dc295052aa79c530e283ce698b8c6bb1b42ff0944252e1910dbecdc5425', '1999-02-13', 'treo@mail.com', '6239cc02b57f4.jpg', 'user');
+(1, 'BOB', 'Tshigerillo', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '1996-06-06', 'bober@gmail.com', '6239b82334a91.jpg', 'adm');
 
 --
 -- Indexes for dumped tables
@@ -92,8 +88,7 @@ ALTER TABLE `booking`
 -- Indexes for table `hotels`
 --
 ALTER TABLE `hotels`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_supplierId` (`fk_supplierId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -109,19 +104,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `bookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -131,14 +126,8 @@ ALTER TABLE `users`
 -- Constraints for table `booking`
 --
 ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`fk_userid`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`);
-
---
--- Constraints for table `hotels`
---
-ALTER TABLE `hotels`
-  ADD CONSTRAINT `hotels_ibfk_1` FOREIGN KEY (`fk_supplierId`) REFERENCES `booking` (`bookingId`) ON DELETE SET NULL;
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`fk_userid`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
